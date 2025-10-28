@@ -25,6 +25,9 @@ public class User {
     @Column(nullable = false, length = 50)
     private String username;
 
+    @Column(name = "full_name", nullable = false, length = 50)
+    private String fullName;
+
     @Column(nullable = false, length = 100)
     private String password;
 
@@ -46,8 +49,9 @@ public class User {
 
     protected User() {}
 
-    public User(String username, String email, String password) {
+    public User(String username, String fullName, String email, String password) {
         this.username = username;
+        this.fullName = fullName;
         this.password = password;
         this.email = email;
     }
@@ -56,6 +60,9 @@ public class User {
 
     public String getUsername() { return this.username; }
     public void setUsername(String username) { this.username = username; }
+
+    public String getFullName() { return this.fullName; }
+    public void setFullName(String fullName) { this.fullName = fullName; }
 
     public String getPassword() { return this.password; }
     public void setPassword(String password) { this.password = password; }

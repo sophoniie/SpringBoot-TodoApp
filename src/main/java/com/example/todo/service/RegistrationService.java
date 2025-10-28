@@ -19,13 +19,13 @@ public class RegistrationService {
     }
 
     @Transactional
-    public User register(String username, String email, String rawPassword) {
+    public User register(String username, String fullName, String email, String rawPassword) {
         if (userRepository.findByUsername(username) != null) {
             throw new IllegalArgumentException("Username already taken");
         }
 
         String encoded = passwordEncoder.encode(rawPassword);
-        User user = new User(username, email, encoded);
+        User user = new User(username, fullName, email, encoded);
         return userRepository.save(user);
     }
 }
