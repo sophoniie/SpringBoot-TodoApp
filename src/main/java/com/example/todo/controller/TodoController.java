@@ -8,13 +8,11 @@ import com.example.todo.dto.TodoResponse;
 import com.example.todo.model.Todo;
 import com.example.todo.service.TodoService;
 
-import java.nio.file.attribute.UserPrincipal;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import com.example.todo.security.UserPrincipal;
 
 
 
@@ -30,9 +28,11 @@ public class TodoController {
 
     @PostMapping
     public ResponseEntity<TodoResponse> create(
-        @AuthenticationPrincipal UserPrincipal principal,
+        @AuthenticationPrincipal UserPrincipal userDetails,
         @RequestBody TodoRequest request) {
-
-            Todo created = todoService.createTodo(principal., request.getTitle(), request.getDescription(), request.getCompleted());
+            Todo created = todoService.createTodo(userDetails.getId(), request.getTitle(), request.getDescription());
+        
+            TodoResponse response = new TodoResponse(created.getId(), created.getTitle(), created.getDescription(), created.getCompleted());
+            return ResponseEntity.ok(response);
         }
 }

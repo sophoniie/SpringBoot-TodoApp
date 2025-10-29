@@ -17,11 +17,10 @@ import com.example.todo.util.JwtUtil;
 @Configuration
 public class SecurityConfig {
 
-    @Autowired
-    private JwtUtil jwtUtil;
+    private UserDetailsService userDetailsService;
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private JwtUtil jwtUtil;
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
